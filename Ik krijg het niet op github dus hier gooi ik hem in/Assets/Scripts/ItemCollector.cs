@@ -51,11 +51,21 @@ public class ItemCollector : MonoBehaviour
             cherriesText.text = table + "\n /\n " + allTable + "\n" + leg + "\n /\n " + allLeg + "\n" + bolt + "\n /\n  " + allBolt;
         }
 
+        if (collision.gameObject.CompareTag("card"))
+        {
+            collectionSoundEffect.Play();
+            Destroy(collision.gameObject);
+        }
+
         if (collision.gameObject.CompareTag("Cherry"))
         {
             collectionSoundEffect.Play();
             Destroy(collision.gameObject);
-            //timeValue = timeValue + 10;
+            PlayerMovement playerScript = GetComponent<PlayerMovement>();
+            if(playerScript)
+            {
+                playerScript.moveSpeed += 10f;
+            }
         }
 
         if (allLeg == leg && allTable == table && allBolt == bolt)
